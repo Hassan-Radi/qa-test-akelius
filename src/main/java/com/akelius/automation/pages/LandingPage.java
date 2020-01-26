@@ -20,14 +20,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.akelius.automation.components.ChooseLanguageComponent;
 import com.akelius.automation.core.PageObject;
-import com.akelius.automation.data.TestData;
 
 public class LandingPage extends PageObject {
 
   protected static final Logger logger = LogManager.getLogger(LandingPage.class);
 
   public LandingPage() {
-    driver.navigate().to(TestData.LANDING_PAGE);
     /** Make sure that the page loaded successfully before interacting with it */
     wait.until(ExpectedConditions.visibilityOf(changeLanguageButton));
   }

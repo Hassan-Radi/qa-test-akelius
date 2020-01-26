@@ -25,7 +25,7 @@ public class WebTests extends BaseTest {
   @Test
   public void changeLanguage() {
     logger.info("STEP 1 - Navigating to the website.");
-    LandingPage landingPage = new LandingPage();
+    LandingPage landingPage = navigateToLandingPage();
 
     logger.info("STEP 2 - Changing the language to 'en_UK'...");
     landingPage.changeLanguageToEnUk();

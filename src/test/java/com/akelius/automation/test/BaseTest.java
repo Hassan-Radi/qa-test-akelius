@@ -21,6 +21,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import com.akelius.automation.core.DriverManager;
+import com.akelius.automation.data.TestData;
+import com.akelius.automation.pages.LandingPage;
 
 /** Base test class for the common setup and driver creation for all the test cases. */
 public class BaseTest {
@@ -33,7 +35,7 @@ public class BaseTest {
     logger.info(
         "\n*************************************************************************************\n"
             + "*************************************NEW TEST****************************************\n"
-            + "*************************************************************************************\n\n");
+            + "*************************************************************************************");
   }
 
   @AfterMethod
@@ -58,5 +60,11 @@ public class BaseTest {
       DriverManager.getDriver().quit();
       logger.info("Terminating the driver session and killing the browser...");
     }
+  }
+
+  /** @return An object of the LandingPage. */
+  public LandingPage navigateToLandingPage() {
+    driver.navigate().to(TestData.LANDING_PAGE);
+    return new LandingPage();
   }
 }

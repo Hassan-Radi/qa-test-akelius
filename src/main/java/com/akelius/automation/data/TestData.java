@@ -38,7 +38,7 @@ public class TestData {
   // Timeouts
   public static final int TEN_SECONDS = 10;
   public static final int HALF_SECOND_IN_MILLI = 500;
-  public static final int ONE_SECOND_IN_MILLI = 5000;
+  public static final int ONE_SECOND_IN_MILLI = 1000;
   public static final int TWENTY_SECOND_WAIT_MILLI = 20000;
 
   // Selenium
