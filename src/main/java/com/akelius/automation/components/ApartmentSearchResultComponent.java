@@ -15,10 +15,16 @@ package com.akelius.automation.components;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.akelius.automation.core.PageObject;
 import com.akelius.automation.data.Apartment;
+import com.akelius.automation.pages.ApartmentPage;
 
+/**
+ * There is a limitation with the built-in Page object model in Selenium and we can't use it in this
+ * class and have to use a different workaround
+ */
 public class ApartmentSearchResultComponent extends PageObject {
 
   protected static final Logger logger = LogManager.getLogger(ApartmentSearchResultComponent.class);
@@ -38,15 +44,22 @@ public class ApartmentSearchResultComponent extends PageObject {
     this.baseComponent = baseComponent;
   }
 
-  public String getTitle() {
-    /**
-     * This is a limitation with the built-in Page object model in Selenium and we have to do things
-     * this way as a workaround
-     */
-    return driver.findElement(By.xpath(baseComponent + TITLE_ELEMENT_LOCTOR)).getText().trim();
+  public ApartmentPage navigateToApartment() {
+    logger.info("Clicking on the apartment...");
+    getTitle().click();
+
+    return new ApartmentPage();
   }
 
-  public String getAddress() {
+  public WebElement getTitle() {
+    return driver.findElement(By.xpath(baseComponent + TITLE_ELEMENT_LOCTOR));
+  }
+
+  public String getTitleText() {
+    return getTitle().getText().trim();
+  }
+
+  public String getAddressText() {
     return driver
         .findElement(By.xpath(baseComponent + ADDRESS_ELEMENT_LOCATOR))
         .getText()
@@ -54,7 +67,7 @@ public class ApartmentSearchResultComponent extends PageObject {
         .replace("\n", " ");
   }
 
-  public String getRoomNumber() {
+  public String getRoomText() {
     return driver
         .findElement(By.xpath(baseComponent + ROOMS_ELEMENT_LOCATOR))
         .getText()
@@ -62,7 +75,7 @@ public class ApartmentSearchResultComponent extends PageObject {
         .split(" ")[1];
   }
 
-  public int getSize() {
+  public int getSizeInMeterSquare() {
     return Integer.valueOf(
         driver
             .findElement(By.xpath(baseComponent + SIZE_ELEMENT_LOCATOR))
@@ -71,11 +84,11 @@ public class ApartmentSearchResultComponent extends PageObject {
             .split(" ")[0]);
   }
 
-  public String getFloor() {
+  public String getFloorText() {
     return driver.findElement(By.xpath(baseComponent + FLOOR_ELEMENT_LOCATOR)).getText().trim();
   }
 
-  public int getRent() {
+  public int getRentAmount() {
     return Integer.valueOf(
         driver
             .findElement(By.xpath(baseComponent + RENT_ELEMENT_LOCATOR))
@@ -85,7 +98,7 @@ public class ApartmentSearchResultComponent extends PageObject {
             .replace(".", ""));
   }
 
-  public String getAvailableFromDate() {
+  public String getAvailableFromDateText() {
     return driver
         .findElement(By.xpath(baseComponent + AVAILABLE_FROM_ELEMENT_LOCATOR))
         .getText()
@@ -96,12 +109,12 @@ public class ApartmentSearchResultComponent extends PageObject {
 
   public Apartment getApartmentObject() {
     return new Apartment(
-        getTitle(),
-        getAddress(),
-        getRoomNumber(),
-        getSize(),
-        getFloor(),
-        getRent(),
-        getAvailableFromDate());
+        getTitleText(),
+        getAddressText(),
+        getRoomText(),
+        getSizeInMeterSquare(),
+        getFloorText(),
+        getRentAmount(),
+        getAvailableFromDateText());
   }
 }

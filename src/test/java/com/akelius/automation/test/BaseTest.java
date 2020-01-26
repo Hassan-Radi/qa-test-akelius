@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
@@ -33,8 +34,14 @@ public class BaseTest {
   public void beforeMethod() {
     logger.info(
         "\n*************************************************************************************\n"
-            + "*************************************NEW TEST****************************************\n"
+            + "*********************************** TEST START **************************************\n"
             + "*************************************************************************************");
+  }
+
+  @AfterMethod
+  public void afterMethod() {
+    logger.info(
+        "\n************************************ TEST END ***************************************\n\n\n");
   }
 
   @BeforeClass

@@ -21,11 +21,14 @@ import org.testng.annotations.Test;
 
 import com.akelius.automation.components.ApartmentSearchResultComponent;
 import com.akelius.automation.data.TestData;
+import com.akelius.automation.pages.ApartmentPage;
 import com.akelius.automation.pages.LandingPage;
+import com.akelius.automation.util.Helper;
 
 public class WebTests extends BaseTest {
 
   private LandingPage landingPage;
+  private List<ApartmentSearchResultComponent> apartmentSearchResults;
 
   @Test
   public void changeLanguage() {
@@ -66,9 +69,11 @@ public class WebTests extends BaseTest {
 
     logger.info("Verify #2: Verify that the displayed number of apartments is correct.");
     int apartmentCountBefore = landingPage.getApartmentCount();
-    List<ApartmentSearchResultComponent> apartments = landingPage.getAllApartments();
+    apartmentSearchResults = landingPage.getAllApartments();
     Assert.assertEquals(
-        apartments.size(), apartmentCountBefore, "Incorrect number of apartments is displayed.");
+        apartmentSearchResults.size(),
+        apartmentCountBefore,
+        "Incorrect number of apartments is displayed.");
 
     logger.info("Verify #3: Verify that each apartment is displayed only once.");
     Assert.assertTrue(landingPage.areApartmentValuesUnique(), "Apartment values are not unique.");
@@ -84,5 +89,22 @@ public class WebTests extends BaseTest {
         "Verify #5: Verify that the list view is displayed and the number of results is the same.");
     Assert.assertEquals(
         landingPage.getApartmentCount(), apartmentCountBefore, "Apartment count has changed.");
+  }
+
+  @Test(dependsOnMethods = "filterByCityAndSize")
+  public void checkApartmentDetails() {
+    logger.info("STEP 1 - Clicking on the first apartment from the search results.");
+    String apartmentTitle = apartmentSearchResults.get(0).getTitleText();
+    ApartmentPage apartmentPage = apartmentSearchResults.get(0).navigateToApartment();
+
+    logger.info("Verify #1: Verify that text writen in the title is the address of the apartment.");
+    Assert.assertEquals(
+        apartmentPage.getApartmentTitle(), apartmentTitle, "Incorrect apartment title.");
+
+    logger.info("Verify #2: Verify that The 'id' of the apartment matches the id in the URL.");
+    Assert.assertEquals(
+        apartmentPage.getApartmentId(),
+        Helper.extractGroupFromRegex(TestData.APARTMENT_ID_REGEX, driver.getCurrentUrl()),
+        "Incorrect apartment ID is displayed on the website.");
   }
 }

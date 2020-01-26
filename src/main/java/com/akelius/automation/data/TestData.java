@@ -86,6 +86,7 @@ public class TestData {
   public static final String SLIDER_VALUE_NOW_ATTRIBUTE = "aria-valuenow";
   public static final String TAB_VIEW_SELECTED_ATTRIBUTE = "aria-selected";
   public static final String APARTMENT_SIZE_SLIDER_PARTIAL_URL = "?sizeFrom=%s&sizeTo=%s";
+  public static final String APARTMENT_ID_REGEX = "detail/(.*)";
   public static final int SLIDER_MIN_VALUE = 40;
   public static final int SLIDER_MAX_VALUE = 96;
 

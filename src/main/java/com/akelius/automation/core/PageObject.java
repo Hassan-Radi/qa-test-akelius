@@ -24,6 +24,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.akelius.automation.data.TestData;
+import com.akelius.automation.util.Helper;
 
 /** Base page object to offer common functionality for page object creation. */
 public class PageObject {
@@ -35,6 +36,9 @@ public class PageObject {
   public PageObject() {
     driver = DriverManager.getDriver();
     wait = new WebDriverWait(driver, TestData.TEN_SECONDS, TestData.HALF_SECOND_IN_MILLI);
+
+    // wait for the page to finish loading
+    Helper.waitForPageLoadingToComplete();
 
     PageFactory.initElements(driver, this);
   }
