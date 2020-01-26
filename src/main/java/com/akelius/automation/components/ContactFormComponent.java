@@ -24,7 +24,7 @@ import com.akelius.automation.core.PageObject;
 public class ContactFormComponent extends PageObject {
 
   protected static final Logger logger = LogManager.getLogger(ContactFormComponent.class);
-  public static final String BASE_LOCATOR = "//mat-dialog-container";
+  private static final String BASE_LOCATOR = "//mat-dialog-container";
 
   public ContactFormComponent() {
     /** Make sure that the page loaded successfully before interacting with it */
