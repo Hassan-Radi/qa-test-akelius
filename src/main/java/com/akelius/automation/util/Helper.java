@@ -35,7 +35,8 @@ public class Helper {
   public static boolean isFirefox() {
     if (DriverManager.getDriver() == null) {
       return false;
-    } else if (DriverManager.getDriver() instanceof FirefoxDriver) {
+    } else if (DriverManager.getDriver() instanceof FirefoxDriver
+        || TestData.BROWSER.equalsIgnoreCase(TestData.FIREFOX_BROWSER)) {
       return true;
     }
 
@@ -46,7 +47,8 @@ public class Helper {
   public static boolean isChrome() {
     if (DriverManager.getDriver() == null) {
       return false;
-    } else if (DriverManager.getDriver() instanceof ChromeDriver) {
+    } else if (DriverManager.getDriver() instanceof ChromeDriver
+        || TestData.BROWSER.equalsIgnoreCase(TestData.CHROME_BROWSER)) {
       return true;
     }
 
