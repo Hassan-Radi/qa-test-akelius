@@ -15,10 +15,12 @@ package com.akelius.automation.components;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.akelius.automation.core.PageObject;
+import com.akelius.automation.util.Helper;
 
 public class ChooseLanguageComponent extends PageObject {
 
@@ -43,7 +45,15 @@ public class ChooseLanguageComponent extends PageObject {
   public void clickOnUk() {
     logger.info("Clicking on the UK on the map...");
     wait.until(ExpectedConditions.visibilityOf(ukMapElement));
-    ukMapElement.click();
+    if (Helper.isFirefox()) {
+      /**
+       * Firefox tries to scroll the element into view here and ends up throwing an exception, so we
+       * are using a workaround to resolve this issue.
+       */
+      new Actions(driver).click(ukMapElement).perform();
+    } else {
+      ukMapElement.click();
+    }
 
     logger.info("Clicking on 'English' from the language list...");
     wait.until(ExpectedConditions.visibilityOf(languageButton));

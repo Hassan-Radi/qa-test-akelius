@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.akelius.automation.data.TestData;
@@ -111,5 +112,21 @@ public class PageObject {
     }
 
     return field;
+  }
+
+  /**
+   * Waits until the text is populated to the element before returning the handle to the caller.
+   * Useful in case of browsers (like Firefox).
+   *
+   * @param element The element to check its text.
+   */
+  public static void waitUntilTextIsNotEmpty(WebElement element) {
+    wait.until(
+        new ExpectedCondition<Boolean>() {
+          @Override
+          public Boolean apply(WebDriver d) {
+            return element.getText().length() != 0;
+          }
+        });
   }
 }

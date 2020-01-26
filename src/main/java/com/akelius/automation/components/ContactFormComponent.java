@@ -74,7 +74,12 @@ public class ContactFormComponent extends PageObject {
       nameTextBox.sendKeys(Keys.TAB);
     }
 
-    return expectError ? nameErrorText.getText().trim() : null;
+    if (expectError) {
+      waitUntilTextIsNotEmpty(nameErrorText);
+      return nameErrorText.getText().trim();
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -96,7 +101,12 @@ public class ContactFormComponent extends PageObject {
       emailTextBox.sendKeys(Keys.TAB);
     }
 
-    return expectError ? emailErrorText.getText().trim() : null;
+    if (expectError) {
+      waitUntilTextIsNotEmpty(emailErrorText);
+      return emailErrorText.getText().trim();
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -118,7 +128,12 @@ public class ContactFormComponent extends PageObject {
       phoneNumberTextBox.sendKeys(Keys.TAB);
     }
 
-    return expectError ? phoneNumberErrorText.getText().trim() : null;
+    if (expectError) {
+      waitUntilTextIsNotEmpty(phoneNumberErrorText);
+      return phoneNumberErrorText.getText().trim();
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -140,6 +155,11 @@ public class ContactFormComponent extends PageObject {
       messageTextArea.sendKeys(Keys.TAB);
     }
 
-    return expectError ? messageErrorText.getText().trim() : null;
+    if (expectError) {
+      waitUntilTextIsNotEmpty(messageErrorText);
+      return messageErrorText.getText().trim();
+    } else {
+      return null;
+    }
   }
 }
