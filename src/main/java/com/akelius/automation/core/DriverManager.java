@@ -10,13 +10,13 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  */
-package com.akelius.core;
+package com.akelius.automation.core;
 
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 
-import com.akelius.data.TestData;
+import com.akelius.automation.data.TestData;
 
 /**
  * Responsible for creating driver instances according to the requested configs and allowing other
@@ -53,12 +53,7 @@ public class DriverManager {
 
       // Wait 10 seconds before you declare an element as not found
       driver.manage().timeouts().implicitlyWait(TestData.TEN_SECONDS, TimeUnit.SECONDS);
-
-      /**
-       * BrowserStack is unable to set the resolution of the browser, so we have to use Selenium to
-       * force the window resolution after the driver is initialised.
-       */
-      driver.manage().window().setSize(TestData.RESOLUTION_DIMENSION_VALUE);
+      driver.manage().window().maximize();
     }
 
     return driver;

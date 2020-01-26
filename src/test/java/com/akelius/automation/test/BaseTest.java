@@ -10,53 +10,37 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  */
-package com.akelius.automation;
+package com.akelius.automation.test;
 
-import java.util.logging.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import com.akelius.core.DriverManager;
-import com.akelius.core.PageObject;
+import com.akelius.automation.core.DriverManager;
 
 /** Base test class for the common setup and driver creation for all the test cases. */
 public class BaseTest {
 
-  protected static final Logger LOGGER = Logger.getLogger(BaseTest.class.getName());
+  protected static final Logger logger = LogManager.getLogger(BaseTest.class);
   protected static WebDriver driver = null;
-
-  /**
-   * Navigate to a website page given the URL and create an instance of a page object given its
-   * class name
-   *
-   * @param pageURL
-   * @param clazz
-   * @return
-   */
-  public <T extends PageObject> T navigateToPage(String pageURL, Class<T> clazz) {
-    LOGGER.info("Navigating to page with URL = " + pageURL);
-    DriverManager.getDriver().get(pageURL);
-    return PageFactory.initElements(driver, clazz);
-  }
 
   @BeforeMethod
   public void beforeMethod() {
-    LOGGER.info(
+    logger.info(
         "\n*************************************************************************************\n"
             + "*************************************NEW TEST****************************************\n"
-            + "*************************************************************************************");
+            + "*************************************************************************************\n\n");
   }
 
   @AfterMethod
   public void afterMethod() {
     /** delete all cookies in the session to be able to start the new test with no old data */
     DriverManager.getDriver().manage().deleteAllCookies();
-    LOGGER.info("Cleaned all the session cookies to start running a new test.\n\n");
+    logger.info("Cleaned all the session cookies to start running a new test.\n\n");
   }
 
   @BeforeClass
@@ -72,7 +56,7 @@ public class BaseTest {
      */
     if (DriverManager.getDriver() != null) {
       DriverManager.getDriver().quit();
-      LOGGER.info("Terminating the driver session and killing the browser...");
+      logger.info("Terminating the driver session and killing the browser...");
     }
   }
 }

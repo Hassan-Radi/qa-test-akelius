@@ -10,11 +10,12 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  */
-package com.akelius.core;
+package com.akelius.automation.core;
 
 import java.lang.reflect.Field;
-import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,18 +23,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.akelius.data.TestData;
+import com.akelius.automation.data.TestData;
 
 /** Base page object to offer common functionality for page object creation. */
 public class PageObject {
 
   protected static WebDriver driver;
   protected static WebDriverWait wait;
-  protected static final Logger LOGGER = Logger.getLogger(PageObject.class.getName());
+  protected static final Logger logger = LogManager.getLogger(PageObject.class);
 
   public PageObject() {
     driver = DriverManager.getDriver();
-    wait = new WebDriverWait(driver, TestData.TEN_SECONDS, TestData.FIFTY_MILLI_SECONDS);
+    wait = new WebDriverWait(driver, TestData.TEN_SECONDS, TestData.HALF_SECOND_IN_MILLI);
 
     PageFactory.initElements(driver, this);
   }
@@ -76,7 +77,7 @@ public class PageObject {
     try {
       value = getFieldValue(clazz, memberVariableName).getDeclaredAnnotation(FindBy.class).xpath();
     } catch (Exception ex) {
-      LOGGER.info("Failed to get the annotation value. Exception = " + ex);
+      logger.info("Failed to get the annotation value. Exception = " + ex);
     }
     return value;
   }

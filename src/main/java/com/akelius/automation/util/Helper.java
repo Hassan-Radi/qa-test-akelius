@@ -10,7 +10,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  */
-package com.akelius.util;
+package com.akelius.automation.util;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,8 +22,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.akelius.core.DriverManager;
-import com.akelius.data.TestData;
+import com.akelius.automation.core.DriverManager;
+import com.akelius.automation.data.TestData;
 
 /** provides some helper functions that can be used across the framework. */
 public class Helper {
@@ -121,5 +121,20 @@ public class Helper {
     alertWithValue.accept();
 
     return Long.valueOf(alertText);
+  }
+
+  /**
+   * Stops the current thread's execution for a few milliseconds. This is to be used with caution as
+   * static waits are not a good technique for waiting for element. ONLY use this to wait for
+   * animations to finish
+   *
+   * @param milliseconds The amount of milliseconds to wait for.
+   */
+  public static void sleep(long milliseconds) {
+    try {
+      Thread.sleep(milliseconds);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

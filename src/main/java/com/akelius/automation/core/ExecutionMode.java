@@ -10,7 +10,7 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  */
-package com.akelius.core;
+package com.akelius.automation.core;
 
 import java.net.URL;
 import java.util.logging.Logger;
@@ -21,7 +21,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.akelius.data.TestData;
+import com.akelius.automation.data.TestData;
 
 /** An enum that defines all the execution modes supported by the framework */
 public enum ExecutionMode implements IExecutionMode {

@@ -10,11 +10,11 @@
  * <p>See the License for the specific language governing permissions and limitations under the
  * License.
  */
-package com.akelius.data;
+package com.akelius.automation.data;
 
 import org.openqa.selenium.Dimension;
 
-import com.akelius.core.ExecutionMode;
+import com.akelius.automation.core.ExecutionMode;
 
 /**
  * Class to act as a container for all the test data in the project. When you need to change any of
@@ -37,8 +37,8 @@ public class TestData {
 
   // Timeouts
   public static final int TEN_SECONDS = 10;
-  public static final int FIFTY_MILLI_SECONDS = 50;
-  public static final int FOUR_MILLISECONDS = 4000;
+  public static final int HALF_SECOND_IN_MILLI = 500;
+  public static final int ONE_SECOND_IN_MILLI = 5000;
   public static final int TWENTY_SECOND_WAIT_MILLI = 20000;
 
   // Selenium
@@ -80,9 +80,9 @@ public class TestData {
   public static final String COMPLETE_STATE = "complete";
 
   // Misc
-  public static final String PROJECT_VALUE = "UP42";
+  public static final String PROJECT_VALUE = "Akelius";
+  public static final String EN_UK_LOCALE = "en_UK";
+
   // URLs
-  public static final String LANDING_PAGE = "https://up42.com/";
-  public static final String EMAIL = "hassan.muhammad1990@gmail.com";
-  public static final String PASSWORD = "aWQJ5fGxuEjq9kq";
+  public static final String LANDING_PAGE = "https://rent.akelius.com/";
 }
