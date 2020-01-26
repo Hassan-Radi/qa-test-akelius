@@ -89,6 +89,15 @@ public class TestData {
   public static final String APARTMENT_ID_REGEX = "detail/(.*)";
   public static final int SLIDER_MIN_VALUE = 40;
   public static final int SLIDER_MAX_VALUE = 96;
+  public static final String INVALID_TEXT = "querty";
+  public static final String NAME_EMPTY_ERROR_MESSAGE_ENG = "name is a required field";
+  public static final String EMAIL_EMPTY_ERROR_MESSAGE_ENG = "email is a required field";
+  public static final String PHONE_NUMBER_EMPTY_ERROR_MESSAGE_ENG =
+      "phone number is a required field";
+  public static final String MESSAGE_EMPTY_ERROR_MESSAGE_ENG = "message is a required field";
+  public static final String EMAIL_INVALID_FORMAT_ERROR_MESSAGE_ENG = "email is in invalid format";
+  public static final String PHONE_NUMBER_INVALID_FORMAT_ERROR_MESSAGE_ENG =
+      "phone is in invalid format";
 
   // URLs
   public static final String LANDING_PAGE = "https://rent.akelius.com/";

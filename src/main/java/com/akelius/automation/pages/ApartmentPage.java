@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import com.akelius.automation.components.ContactFormComponent;
 import com.akelius.automation.core.PageObject;
 
 public class ApartmentPage extends PageObject {
@@ -26,20 +27,30 @@ public class ApartmentPage extends PageObject {
 
   public ApartmentPage() {
     /** Make sure that the page loaded successfully before interacting with it */
-    wait.until(ExpectedConditions.visibilityOf(apartmentTitle));
+    wait.until(ExpectedConditions.visibilityOf(apartmentTitleText));
   }
 
   @FindBy(xpath = "//h1")
-  private WebElement apartmentTitle;
+  private WebElement apartmentTitleText;
 
   @FindBy(xpath = "//h2")
-  private WebElement apartmentId;
+  private WebElement apartmentIdText;
+
+  @FindBy(xpath = "//mat-icon[text()='mail_outline']//ancestor::button")
+  private WebElement contactButton;
 
   public String getApartmentTitle() {
-    return apartmentTitle.getText();
+    return apartmentTitleText.getText();
   }
 
   public String getApartmentId() {
-    return apartmentId.getText().split(" ")[1];
+    return apartmentIdText.getText().split(" ")[1];
+  }
+
+  public ContactFormComponent contactApartmentOwner() {
+    logger.info("Clicking on the 'Contact' button...");
+    contactButton.click();
+
+    return new ContactFormComponent();
   }
 }

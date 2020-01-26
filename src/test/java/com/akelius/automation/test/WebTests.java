@@ -20,6 +20,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.akelius.automation.components.ApartmentSearchResultComponent;
+import com.akelius.automation.components.ContactFormComponent;
 import com.akelius.automation.data.TestData;
 import com.akelius.automation.pages.ApartmentPage;
 import com.akelius.automation.pages.LandingPage;
@@ -29,6 +30,7 @@ public class WebTests extends BaseTest {
 
   private LandingPage landingPage;
   private List<ApartmentSearchResultComponent> apartmentSearchResults;
+  private ApartmentPage apartmentPage;
 
   @Test
   public void changeLanguage() {
@@ -95,7 +97,7 @@ public class WebTests extends BaseTest {
   public void checkApartmentDetails() {
     logger.info("STEP 1 - Clicking on the first apartment from the search results.");
     String apartmentTitle = apartmentSearchResults.get(0).getTitleText();
-    ApartmentPage apartmentPage = apartmentSearchResults.get(0).navigateToApartment();
+    apartmentPage = apartmentSearchResults.get(0).navigateToApartment();
 
     logger.info("Verify #1: Verify that text writen in the title is the address of the apartment.");
     Assert.assertEquals(
@@ -106,5 +108,48 @@ public class WebTests extends BaseTest {
         apartmentPage.getApartmentId(),
         Helper.extractGroupFromRegex(TestData.APARTMENT_ID_REGEX, driver.getCurrentUrl()),
         "Incorrect apartment ID is displayed on the website.");
+  }
+
+  @Test(dependsOnMethods = "checkApartmentDetails")
+  public void checkContactFormValidations() {
+    logger.info("STEP 1 - Clicking on the 'Contact' button.");
+    ContactFormComponent contactForm = apartmentPage.contactApartmentOwner();
+
+    logger.info(
+        "Verify #1: Verify that name field shows the proper message when you type nothing in it.");
+    Assert.assertEquals(
+        contactForm.typeInNameField(null, true),
+        TestData.NAME_EMPTY_ERROR_MESSAGE_ENG,
+        "Incorrect error message.");
+    logger.info(
+        "Verify #2: Verify that email field shows the proper message when you type nothing in it.");
+    Assert.assertEquals(
+        contactForm.typeInEmailField(null, true),
+        TestData.EMAIL_EMPTY_ERROR_MESSAGE_ENG,
+        "Incorrect error message.");
+    logger.info(
+        "Verify #3: Verify that phone number field shows the proper message when you type nothing in it.");
+    Assert.assertEquals(
+        contactForm.typeInPhoneNumberField(null, true),
+        TestData.PHONE_NUMBER_EMPTY_ERROR_MESSAGE_ENG,
+        "Incorrect error message.");
+    logger.info(
+        "Verify #4: Verify that message field shows the proper message when you type nothing in it.");
+    Assert.assertEquals(
+        contactForm.typeInMessageField(null, true),
+        TestData.MESSAGE_EMPTY_ERROR_MESSAGE_ENG,
+        "Incorrect error message.");
+    logger.info(
+        "Verify #5: Verify that email field shows the proper message when you type an invalid email in it.");
+    Assert.assertEquals(
+        contactForm.typeInEmailField(TestData.INVALID_TEXT, true),
+        TestData.EMAIL_INVALID_FORMAT_ERROR_MESSAGE_ENG,
+        "Incorrect error message.");
+    logger.info(
+        "Verify #6: Verify that phone number field shows the proper message when you type an invalid phone number in it.");
+    Assert.assertEquals(
+        contactForm.typeInPhoneNumberField(TestData.INVALID_TEXT, true),
+        TestData.PHONE_NUMBER_INVALID_FORMAT_ERROR_MESSAGE_ENG,
+        "Incorrect error message.");
   }
 }
