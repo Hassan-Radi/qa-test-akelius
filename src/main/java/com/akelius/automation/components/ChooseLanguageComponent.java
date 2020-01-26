@@ -19,8 +19,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.akelius.automation.core.PageObject;
-import com.akelius.automation.data.TestData;
-import com.akelius.automation.util.Helper;
 
 public class ChooseLanguageComponent extends PageObject {
 
@@ -46,11 +44,9 @@ public class ChooseLanguageComponent extends PageObject {
     logger.info("Clicking on the UK on the map...");
     wait.until(ExpectedConditions.visibilityOf(ukMapElement));
     ukMapElement.click();
-    Helper.sleep(TestData.ONE_SECOND_IN_MILLI);
 
     logger.info("Clicking on 'English' from the language list...");
     wait.until(ExpectedConditions.visibilityOf(languageButton));
     languageButton.click();
-    Helper.sleep(TestData.ONE_SECOND_IN_MILLI);
   }
 }

@@ -82,6 +82,12 @@ public class TestData {
   // Misc
   public static final String PROJECT_VALUE = "Akelius";
   public static final String EN_UK_LOCALE = "en_UK";
+  public static final String CITY = "Berlin";
+  public static final String SLIDER_VALUE_NOW_ATTRIBUTE = "aria-valuenow";
+  public static final String TAB_VIEW_SELECTED_ATTRIBUTE = "aria-selected";
+  public static final String APARTMENT_SIZE_SLIDER_PARTIAL_URL = "?sizeFrom=%s&sizeTo=%s";
+  public static final int SLIDER_MIN_VALUE = 40;
+  public static final int SLIDER_MAX_VALUE = 96;
 
   // URLs
   public static final String LANDING_PAGE = "https://rent.akelius.com/";

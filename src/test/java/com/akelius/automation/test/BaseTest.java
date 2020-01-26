@@ -16,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
@@ -36,13 +35,6 @@ public class BaseTest {
         "\n*************************************************************************************\n"
             + "*************************************NEW TEST****************************************\n"
             + "*************************************************************************************");
-  }
-
-  @AfterMethod
-  public void afterMethod() {
-    /** delete all cookies in the session to be able to start the new test with no old data */
-    DriverManager.getDriver().manage().deleteAllCookies();
-    logger.info("Cleaned all the session cookies to start running a new test.\n\n");
   }
 
   @BeforeClass
