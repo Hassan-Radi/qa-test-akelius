@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<testng.version>7.0.0</testng.version>
 		<selenium.version>3.141.59</selenium.version>
-		<log4j.version>2.12.1</log4j.version>
+		<log4j.version>2.15.0</log4j.version>
 	</properties>
 
 	<build>
